@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour
 
 	private int score = 0;                      //The player's score.
 	public bool gameOver = false;               //Is the game over?
-	public float scrollSpeed = -1.5f;
+	public float scrollSpeed = -1f;
 
 
 	void Awake()
@@ -46,10 +46,10 @@ public class GameControl : MonoBehaviour
 		scoreText.text = "Score: " + score.ToString();
 	}
 
-	public void BirdDied()
+	public void GameOver()
 	{
 		//Activate the game over text.
-		gameOvertext.SetActive (true);
+//		gameOvertext.SetActive (true);
 		//Set the game to be over.
 		gameOver = true;
 	}
