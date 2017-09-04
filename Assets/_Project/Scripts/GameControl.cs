@@ -13,6 +13,9 @@ public class GameControl : MonoBehaviour
 	public bool gameOver = false;               //Is the game over?
 	public float scrollSpeed = -1f;
 
+	private bool _jumpReady = true;
+
+	PlayerMovement[] players;
 
 	void Awake()
 	{
@@ -33,7 +36,20 @@ public class GameControl : MonoBehaviour
 			//...reload the current scene.
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
+
+		if (Input.GetMouseButtonDown (0) && _jumpReady) {
+			players = gameObject.GetComponentsInChildren<PlayerMovement>();
+			foreach (PlayerMovement player in players) {
+				player.Jump ();
+			}
+			_jumpReady = false;
+		}
 	}
+
+	public void JumpReady(){
+		_jumpReady = true;
+	}
+
 
 	public void BirdScored()
 	{
