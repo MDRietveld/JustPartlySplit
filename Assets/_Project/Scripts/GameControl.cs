@@ -65,6 +65,10 @@ public class GameControl : MonoBehaviour
 
 	public void GameOver()
 	{
+		players = gameObject.GetComponentsInChildren<PlayerMovement>();
+		foreach (PlayerMovement player in players) {
+			player.BlobbyDied ();
+		}
 		//Activate the game over text.
 //		gameOvertext.SetActive (true);
 		//Set the game to be over.

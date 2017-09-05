@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private Animator anim;
 
+	private bool _jump = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,75 +22,35 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (arrowToTheKnee == true)
+			anim.SetTrigger ("Dead");
 			return;
+		if (rb2d.velocity.y == 0f && _jump) {
+			anim.SetTrigger ("Walk");
+			_jump = false;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log ("Velocity: " + rb2d.velocity.y);
-		Debug.Log ("Center: " + other.bounds.center.y);
-		Debug.Log ("Height: " + GetComponent<Collider2D> ().bounds.size.y / 2f);
-		if (rb2d.velocity.y == 0f) {
-			anim.SetTrigger ("Walk");
-			GameControl.instance.JumpReady ();
-		}
-
+		GameControl.instance.JumpReady ();
 	}
 
 	public void Jump(){
-//		Debug.Log (rb2d.velocity);
 		anim.SetTrigger ("Jump");
+		_jump = true;
 		rb2d.velocity = Vector2.zero;
 		rb2d.AddForce (new Vector2 (0, upForce));
 	}
 
-	void OnCollisionEnter2D (Collision2D collision){
-		Collider2D collider = collision.collider;
-		float RectWidth = GetComponent<Collider2D> ().bounds.size.x;
-		float RectHeight = GetComponent<Collider2D> ().bounds.size.y;
+	public void BlobbyDied(){
+		anim.SetTrigger ("Dead");
+		arrowToTheKnee = true;
+	}
 
+	void OnCollisionEnter2D (Collision2D collision){
+//		Collider2D collider = collision.collider;
 		if(collision.gameObject.tag == "Obstacle")
 		{
-//			Debug.Log ("Collision Obstacle");
-//			bool collideFromLeft = false;
-//			bool collideFromTop = false;
-//			bool collideFromRight = false;
-//			bool collideFromBottom = false;
-//			float circleRad = collider.bounds.size.x;
-
-			Vector3 contactPoint = collision.contacts[0].point;
-			Vector3 center = collider.bounds.center;
-//			Debug.Log (contactPoint);
-//			Debug.Log (center);
-
-			if (contactPoint.y > center.y && //checks that circle is on top of rectangle
-				(contactPoint.x < center.x + RectWidth / 2 && contactPoint.x > center.x - RectWidth / 2)) {
-//				collideFromTop = true;
-//				Debug.Log ("TOP");
-			}
-			if (contactPoint.y < center.y &&
-				(contactPoint.x < center.x + RectWidth / 2 && contactPoint.x > center.x - RectWidth / 2)) {
-//				collideFromBottom = true;
-//				Debug.Log ("BOTTOM");
-			}
-			if (contactPoint.x > center.x &&
-				(contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2)) {
-//				collideFromRight = true;
-//				Debug.Log ("RIGHT");
-			}
-			Debug.Log (collision.contacts[0].point);
-			Debug.Log ("Contact y: " + contactPoint.y);
-			Debug.Log ("Center y: " + center.y);
-			if (contactPoint.x < center.x &&
-				(contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2)) {
-//				collideFromLeft = true;
-//				Debug.Log ("LEFT");
-			}
-
-//			Debug.Log (collideFromLeft);
-//			Debug.Log (collideFromTop);
-//			Debug.Log (collideFromRight);
-//			Debug.Log (collideFromBottom);
-
+			anim.SetTrigger ("Dead");
 			arrowToTheKnee = true;
 			GameControl.instance.GameOver ();
 		}
