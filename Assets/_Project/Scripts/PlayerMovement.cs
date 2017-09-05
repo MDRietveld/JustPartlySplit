@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour {
 	public float upForce = 250f;
 	private bool arrowToTheKnee = false;
 	private Rigidbody2D rb2d;
+	private Animator anim;
 
-//	private bool jumpReady = true;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		anim = GetComponent<Animator> ();
+		anim.SetTrigger ("Walk");
 	}
 	
 	// Update is called once per frame
@@ -23,10 +25,19 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		GameControl.instance.JumpReady ();
+		Debug.Log ("Velocity: " + rb2d.velocity.y);
+		Debug.Log ("Center: " + other.bounds.center.y);
+		Debug.Log ("Height: " + GetComponent<Collider2D> ().bounds.size.y / 2f);
+		if (rb2d.velocity.y == 0f) {
+			anim.SetTrigger ("Walk");
+			GameControl.instance.JumpReady ();
+		}
+
 	}
 
 	public void Jump(){
+//		Debug.Log (rb2d.velocity);
+		anim.SetTrigger ("Jump");
 		rb2d.velocity = Vector2.zero;
 		rb2d.AddForce (new Vector2 (0, upForce));
 	}
@@ -53,17 +64,17 @@ public class PlayerMovement : MonoBehaviour {
 			if (contactPoint.y > center.y && //checks that circle is on top of rectangle
 				(contactPoint.x < center.x + RectWidth / 2 && contactPoint.x > center.x - RectWidth / 2)) {
 //				collideFromTop = true;
-				Debug.Log ("TOP");
+//				Debug.Log ("TOP");
 			}
 			if (contactPoint.y < center.y &&
 				(contactPoint.x < center.x + RectWidth / 2 && contactPoint.x > center.x - RectWidth / 2)) {
 //				collideFromBottom = true;
-				Debug.Log ("BOTTOM");
+//				Debug.Log ("BOTTOM");
 			}
 			if (contactPoint.x > center.x &&
 				(contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2)) {
 //				collideFromRight = true;
-				Debug.Log ("RIGHT");
+//				Debug.Log ("RIGHT");
 			}
 			Debug.Log (collision.contacts[0].point);
 			Debug.Log ("Contact y: " + contactPoint.y);
@@ -71,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (contactPoint.x < center.x &&
 				(contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2)) {
 //				collideFromLeft = true;
-				Debug.Log ("LEFT");
+//				Debug.Log ("LEFT");
 			}
 
 //			Debug.Log (collideFromLeft);
@@ -82,19 +93,5 @@ public class PlayerMovement : MonoBehaviour {
 			arrowToTheKnee = true;
 			GameControl.instance.GameOver ();
 		}
-//		if (collided.gameObject.tag == "Obstacle"){
-//
-//			Vector3 center = collided.collider.bounds.center;
-//			Vector3 contactPoint = collided.contacts[0].point;
-//			// (-1.3, 0.8, -10.0)
-//
-//			bool right = contactPoint.x > center.x;
-//			bool top = contactPoint.y > center.y;
-//			if (right) Debug.Log("Right");
-//			if (top) Debug.Log("Top");
-//			Debug.Log (right);
-//			Debug.Log (top);
-
-//		}
 	}
 }

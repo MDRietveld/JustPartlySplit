@@ -38,11 +38,12 @@ public class GameControl : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonDown (0) && _jumpReady) {
+			_jumpReady = false;
 			players = gameObject.GetComponentsInChildren<PlayerMovement>();
 			foreach (PlayerMovement player in players) {
 				player.Jump ();
 			}
-			_jumpReady = false;
+//			_jumpReady = false;
 		}
 	}
 
