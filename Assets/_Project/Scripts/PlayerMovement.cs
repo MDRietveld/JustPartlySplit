@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (arrowToTheKnee == true)
+			anim.SetTrigger ("Dead");
 			return;
 		if (rb2d.velocity.y == 0f && _jump) {
 			anim.SetTrigger ("Walk");
@@ -38,6 +39,11 @@ public class PlayerMovement : MonoBehaviour {
 		_jump = true;
 		rb2d.velocity = Vector2.zero;
 		rb2d.AddForce (new Vector2 (0, upForce));
+	}
+
+	public void BlobbyDied(){
+		anim.SetTrigger ("Dead");
+		arrowToTheKnee = true;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision){
