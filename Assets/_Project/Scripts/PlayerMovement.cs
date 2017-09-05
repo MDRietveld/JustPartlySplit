@@ -10,20 +10,24 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private Animator anim;
 
-	private bool _jump = false;
+	private bool _jump = true;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
-		anim.SetTrigger ("Walk");
+		anim.SetTrigger ("Jump");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (arrowToTheKnee == true)
-			anim.SetTrigger ("Dead");
-			return;
+        if (GameControl.instance.startGame)
+            return;
+		if (arrowToTheKnee == true) {
+            anim.SetTrigger("Dead");
+            return;
+        }
+			
 		if (rb2d.velocity.y == 0f && _jump) {
 			anim.SetTrigger ("Walk");
 			_jump = false;

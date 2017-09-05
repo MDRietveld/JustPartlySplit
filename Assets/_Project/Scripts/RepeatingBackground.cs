@@ -22,8 +22,8 @@ public class RepeatingBackground : MonoBehaviour
 	//Update runs once per frame
 	private void Update()
 	{
-		//Check if the difference along the x axis between the main Camera and the position of the object this is attached to is greater than groundHorizontalLength.
-		if (transform.position.x < -18)
+        //Check if the difference along the x axis between the main Camera and the position of the object this is attached to is greater than groundHorizontalLength.
+        if (transform.position.x < -18)
 		{
 			//If true, this means this object is no longer visible and we can safely move it forward to be re-used.
 			RepositionBackground ();

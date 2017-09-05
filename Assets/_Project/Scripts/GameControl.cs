@@ -8,12 +8,14 @@ public class GameControl : MonoBehaviour
 	public static GameControl instance;         //A reference to our game control script so we can access it statically.
 	public Text scoreText;                      //A reference to the UI text component that displays the player's score.
 	public GameObject gameOvertext;             //A reference to the object that displays the text which appears when the player dies.
+    public Text startText;
 
-	private int score = 0;                      //The player's score.
+    private int score = 0;                      //The player's score.
 	public bool gameOver = false;               //Is the game over?
 	public float scrollSpeed = -1f;
 
-	private bool _jumpReady = true;
+	private bool _jumpReady = false;
+    public bool startGame = true;
 
 	PlayerMovement[] players;
 
@@ -31,8 +33,15 @@ public class GameControl : MonoBehaviour
 
 	void Update()
 	{
-		//If the game is over and the player has pressed some input...
-		if (gameOver && Input.GetMouseButtonDown(0)) {
+        if (startGame && Input.GetMouseButtonDown(0)){
+            startGame = false;
+            startText.enabled = false;
+        }
+        else if (startGame) {
+            return;
+        }
+        //If the game is over and the player has pressed some input...
+        if (gameOver && Input.GetMouseButtonDown(0)) {
 			//...reload the current scene.
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
