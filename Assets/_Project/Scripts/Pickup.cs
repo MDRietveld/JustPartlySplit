@@ -26,6 +26,7 @@ public class Pickup : MonoBehaviour {
         {
             triggered = true;
             render.enabled = false;
+			GameControl.instance.coinPickup ();
             audio.Play();
             Destroy(gameObject, 5);     //Delay object destruction, ohterwise sound will not be played
             //Todo: add one to score
