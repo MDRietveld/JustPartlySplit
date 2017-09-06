@@ -11,6 +11,10 @@ public class GameControl : MonoBehaviour
 	public GameObject gameOverText2;
     public Text startText;
 
+
+	private AudioSource audio;
+	public AudioClip dieSound;
+
     private int score = 0;            
 	public bool gameOver = false;     
 	public float scrollSpeed = -1f;
@@ -22,9 +26,10 @@ public class GameControl : MonoBehaviour
 
 	void Awake()
 	{
-		if (instance == null)
+		if (instance == null){
+			audio = GetComponent<AudioSource> ();
 			instance = this;
-		else if(instance != this)
+		}else if(instance != this)
 			Destroy (gameObject);
 	}
 
@@ -63,11 +68,19 @@ public class GameControl : MonoBehaviour
 
 	public void scoreCount()
 	{
-		//The bird can't score if the game is over.
 		if (gameOver)   
 			return;
 		//If the game is not over, increase the score...
-		score += 100;
+		score += 50;
+		//...and adjust the score text.
+		scoreText.text = "Score: " + score.ToString();
+	}
+
+	public void coinPickup(){
+		if (gameOver)   
+			return;
+		//If the game is not over, increase the score...
+		score += 10;
 		//...and adjust the score text.
 		scoreText.text = "Score: " + score.ToString();
 	}
@@ -84,6 +97,7 @@ public class GameControl : MonoBehaviour
 		foreach (PlayerMovement player in players) {
 			player.BlobbyDied ();
 		}
+		audio.PlayOneShot(dieSound);
 		gameOver = true;
 	}
 }
