@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private AudioSource audio;
     public AudioClip hitSound;
-    public AudioClip dieSound;
+    
     public AudioClip jumpSound;
 
     public float upForce = 250f;
@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void BlobbyDied(){
 		anim.SetTrigger ("Dead");
-        audio.PlayOneShot(dieSound);
         arrowToTheKnee = true;
 	}
 
@@ -64,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 			anim.SetTrigger ("Dead");
 			gameOverText.text = "Ohh snap, he vanished";
 			arrowToTheKnee = true;
-			Destroy (gameObject);
+			Destroy(gameObject);
 			GameControl.instance.GameOver ();
 		}
 	}
