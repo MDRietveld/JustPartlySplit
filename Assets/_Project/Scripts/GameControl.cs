@@ -24,11 +24,41 @@ public class GameControl : MonoBehaviour
 
 	PlayerMovement[] players;
 
-	void Awake()
+
+    public int mapPoolSize = 3;
+    private GameObject[] easyMaps;
+    private GameObject[] mediumMaps;
+    private GameObject[] hardMaps;
+    private GameObject firstObject;
+    private int easyI;
+    private int mediumI;
+    private int hardI;
+    private int rand;
+    //	public float spawnRate = 4f;
+
+    private GameObject[] maps;
+    private Vector2 objectPoolPosition = new Vector2(5f, 0);
+    //	private float timeSinceLastSpawned;
+    //	private float spawnXPosition = 10f;
+    private int currentMap = 0;
+    private int loadedMaps = 1;
+    
+
+    void Awake()
 	{
 		if (instance == null){
 			audio = GetComponent<AudioSource> ();
-			instance = this;
+            maps = new GameObject[mapPoolSize];
+            easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
+            easyI = easyMaps.GetLength(0);
+            mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
+            mediumI = mediumMaps.GetLength(0);
+            hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
+            hardI = hardMaps.GetLength(0);
+            rand = Random.Range(0, easyI);
+            //		Debug.Log(rand);
+            maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
+            instance = this;
 		}else if(instance != this)
 			Destroy (gameObject);
 	}
@@ -60,6 +90,27 @@ public class GameControl : MonoBehaviour
 //		score++;
 //		scoreText.text = "Score: " + score.ToString();
 	}
+
+    public void LoadMap()
+    {
+        if (currentMap == 0) {
+            currentMap = 1;
+        }  else {
+            currentMap = 0;
+        }
+        if (loadedMaps < 5) {
+            rand = Random.Range(0, easyI);
+            maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
+        }
+        else if(loadedMaps < 10) {
+            rand = Random.Range(0, mediumI);
+            maps[currentMap] = (GameObject)Instantiate(mediumMaps[rand], objectPoolPosition, Quaternion.identity);
+        } else {
+            rand = Random.Range(0, hardI);
+            maps[currentMap] = (GameObject)Instantiate(hardMaps[rand], objectPoolPosition, Quaternion.identity);
+        }
+        loadedMaps++;
+    }
 
 	public void JumpReady(){
 		_jumpReady = true;
