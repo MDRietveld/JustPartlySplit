@@ -8,6 +8,7 @@ public class MapPrefabPool : MonoBehaviour {
 	private GameObject[] easyMaps;
 	private GameObject[] mediumMaps;
 	private GameObject[] hardMaps;
+	private GameObject firstObject;
 	private int mapI;
 	private int rand;
 //	public float spawnRate = 4f;
@@ -31,16 +32,16 @@ public class MapPrefabPool : MonoBehaviour {
 //		RectTransform test = (RectTransform)easyMaps[rand].transform;
 //		Debug.Log (test.rect.width);
 		calcBound(maps[currentMap]);
-
 	}
-	public static void calcBound(GameObject root)
-	{
-		foreach (Transform child in root.transform)
-		{
-			if (!child.gameObject.GetComponent<BoxCollider2D>())
-				child.gameObject.AddComponent<BoxCollider2D>();
 
-		}
+	public void calcBound(GameObject root)
+	{
+//		foreach (Transform child in root.transform)
+//		{
+//			if (!child.gameObject.GetComponent<BoxCollider2D> ())
+//				break;
+//
+//		}
 
 		BoxCollider2D[] boxCollider = root.GetComponentsInChildren<BoxCollider2D>();
 
@@ -49,15 +50,27 @@ public class MapPrefabPool : MonoBehaviour {
 		foreach (BoxCollider2D bc in boxCollider)
 		{
 			bounds.Encapsulate(bc.bounds);
+//			Debug.Log (bc.bounds.center);
+			if (bc.bounds.center.x == 5 && !firstObject) {
+				firstObject = bc.gameObject;
+			}
 		}
 
-		Debug.Log("BoxCollider bounds: " + bounds.ToString());
+		objectPoolPosition.x += bounds.center.x * 2;
+
+//		Debug.Log("BoxCollider bounds: " + bounds.center.x.ToString());
+//		Debug.Log(bounds.center.x * 2);
+		maps[currentMap+1] = (GameObject)Instantiate (easyMaps[rand], objectPoolPosition, Quaternion.identity);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (GameControl.instance.gameOver == false) {
-			
+
+		if (!GameControl.instance.gameOver && !GameControl.instance.startGame) {
+//			Debug.Log (firstObject.GetComponent<BoxCollider2D>().bounds.center.x);
+			Debug.Log (easyMaps[rand].transform.localPosition.x);
+//			objectPoolPosition.x -= 1.5f;	
+//			Debug.Log (objectPoolPosition.x);
 		}
 //		timeSinceLastSpawned += Time.deltaTime;
 //
