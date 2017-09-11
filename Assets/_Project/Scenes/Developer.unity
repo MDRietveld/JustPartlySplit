@@ -690,7 +690,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 701335979}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: -0.48, z: 0}
+  m_LocalPosition: {x: -1, y: -0.3869669, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 925590675}
@@ -1209,7 +1209,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 893864495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.48, z: 0}
+  m_LocalPosition: {x: -1, y: 0.3869669, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 925590675}
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   gameOver: 0
   scrollSpeed: -1.5
   startGame: 1
-  mapPoolSize: 3
+  autoLoad: 1
 --- !u!4 &925590675
 Transform:
   m_ObjectHideFlags: 0
