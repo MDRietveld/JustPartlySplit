@@ -19,13 +19,13 @@ public class GameControl : MonoBehaviour
 	public bool gameOver = false;     
 	public float scrollSpeed = -1f;
 
-	private bool _jumpReady = true;
+	private bool _jumpReady = false;
     public bool startGame = true;
 
 	PlayerMovement[] players;
 
 
-    public int mapPoolSize = 3;
+//    public int mapPoolSize = 3;
     private GameObject[] easyMaps;
     private GameObject[] mediumMaps;
     private GameObject[] hardMaps;
@@ -42,13 +42,16 @@ public class GameControl : MonoBehaviour
     //	private float spawnXPosition = 10f;
     private int currentMap = 0;
     private int loadedMaps = 1;
+
+	[Header("Disable this to test maps")]
+	public bool autoLoad = true;
     
 
     void Awake()
 	{
 		if (instance == null){
 			audio = GetComponent<AudioSource> ();
-            maps = new GameObject[mapPoolSize];
+            maps = new GameObject[2];
             easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
             easyI = easyMaps.GetLength(0);
             mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
@@ -57,7 +60,8 @@ public class GameControl : MonoBehaviour
             hardI = hardMaps.GetLength(0);
             rand = Random.Range(0, easyI);
             //		Debug.Log(rand);
-            maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
+			if (autoLoad)
+            	maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
             instance = this;
 		}else if(instance != this)
 			Destroy (gameObject);
