@@ -43,7 +43,7 @@ public class GameControl : MonoBehaviour
     private int currentMap = 0;
     private int loadedMaps = 1;
 
-	[Header("Disable this to test maps")]
+	[Header("DISABLE this to test maps")]
 	public bool autoLoad = true;
     
 
