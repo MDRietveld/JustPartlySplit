@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour 
 {
 	public static GameControl instance;         
-	public Text scoreText;                      
+	                      
 	public GameObject gameOverText;
 	public GameObject gameOverText2;
+	public Text scoreText;
+	public GameObject highscoreText;
+	public GameObject previousRunText;
     public Text startText;
 
 
@@ -26,10 +29,12 @@ public class GameControl : MonoBehaviour
 
 
 //    public int mapPoolSize = 3;
+	private GameObject[] superEasyMaps;
     private GameObject[] easyMaps;
     private GameObject[] mediumMaps;
     private GameObject[] hardMaps;
     private GameObject firstObject;
+	private int superEasyI;
     private int easyI;
     private int mediumI;
     private int hardI;
@@ -41,7 +46,7 @@ public class GameControl : MonoBehaviour
     //	private float timeSinceLastSpawned;
     //	private float spawnXPosition = 10f;
     private int currentMap = 0;
-    private int loadedMaps = 1;
+    private int loadedMaps = 0;
 
 	[Header("DISABLE this to test maps")]
 	public bool autoLoad = true;
@@ -52,16 +57,28 @@ public class GameControl : MonoBehaviour
 		if (instance == null){
 			audio = GetComponent<AudioSource> ();
             maps = new GameObject[2];
+			superEasyMaps = Resources.LoadAll<GameObject>("PrefabMaps/SuperEasy");
+			superEasyI = superEasyMaps.GetLength(0);
             easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
             easyI = easyMaps.GetLength(0);
             mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
             mediumI = mediumMaps.GetLength(0);
             hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
             hardI = hardMaps.GetLength(0);
-            rand = Random.Range(0, easyI);
-            //		Debug.Log(rand);
+			rand = Random.Range(0, superEasyI);
 			if (autoLoad)
-            	maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
+				maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+
+			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun")) {
+				highscoreText.GetComponent<Text>().text = "Highscore: " + PlayerPrefs.GetInt ("Highscore");
+				previousRunText.GetComponent<Text>().text = "Last Run: " + PlayerPrefs.GetInt("PreviousRun");
+			} else {
+				PlayerPrefs.SetInt ("Highscore", 0);
+				PlayerPrefs.SetInt ("PreviousRun", 0);
+				highscoreText.GetComponent<Text>().text = "Highscore: 0";
+				previousRunText.GetComponent<Text>().text = "Highscore: 0";
+			}
+
             instance = this;
 		}else if(instance != this)
 			Destroy (gameObject);
@@ -69,10 +86,18 @@ public class GameControl : MonoBehaviour
 
 	void Update()
 	{
+		
+		if(startText.enabled == true)
+			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
+		
+		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
         if (startGame && Input.GetMouseButtonDown(0)){
             startGame = false;
             startText.enabled = false;
-			InvokeRepeating("scoreCount", 0, 1.0f);
+			highscoreText.SetActive(false);
+			previousRunText.SetActive(false);
+			scoreText.enabled = true;
+			InvokeRepeating("scoreCount", 1.5f, 1.5f);
 			return;
         } else if (startGame) {
             return;
@@ -142,8 +167,12 @@ public class GameControl : MonoBehaviour
 
 	public void GameOver()
 	{
-		_jumpReady = false;
+		if (score > PlayerPrefs.GetInt("Highscore")){
+			PlayerPrefs.SetInt ("Highscore", score);
+		}
+		PlayerPrefs.SetInt ("PreviousRun", score);
 
+		_jumpReady = false;
 		gameOverText.SetActive (true);
 		gameOverText2.SetActive (true);
 		startText.enabled = true;
