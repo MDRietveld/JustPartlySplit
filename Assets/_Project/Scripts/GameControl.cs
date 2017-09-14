@@ -9,9 +9,9 @@ public class GameControl : MonoBehaviour
 	                      
 	public GameObject gameOverText;
 	public GameObject gameOverText2;
-	public Text scoreText;
 	public GameObject highscoreText;
 	public GameObject previousRunText;
+	public Text scoreText;
     public Text startText;
 
 
@@ -48,6 +48,13 @@ public class GameControl : MonoBehaviour
     private int currentMap = 0;
     private int loadedMaps = 0;
 
+	public int frontUpMap = 0;
+	public int backUpMap = 0;
+	public int frontDownMap = 0;
+	public int backDownMap = 0;
+
+	private ScrollingObject[] scrollingObjects;
+
 	[Header("DISABLE this to test maps")]
 	public bool autoLoad = true;
     
@@ -66,8 +73,7 @@ public class GameControl : MonoBehaviour
             hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
             hardI = hardMaps.GetLength(0);
 			rand = Random.Range(0, superEasyI);
-			if (autoLoad)
-				maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+
 
 			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun")) {
 				highscoreText.GetComponent<Text>().text = "Highscore: " + PlayerPrefs.GetInt ("Highscore");
@@ -97,6 +103,14 @@ public class GameControl : MonoBehaviour
 			highscoreText.SetActive(false);
 			previousRunText.SetActive(false);
 			scoreText.enabled = true;
+			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
+			if (autoLoad)
+				maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+			for (int i = 0; i < scrollingObjects.Length; i++) {
+				scrollingObjects [i].enabled = true;
+			}
+
+
 			InvokeRepeating("scoreCount", 1.5f, 1.5f);
 			return;
         } else if (startGame) {
@@ -123,7 +137,7 @@ public class GameControl : MonoBehaviour
     public void LoadMap()
     {
         if (currentMap == 0) {
-            currentMap = 1;
+            currentMap = 1;					
         }  else {
             currentMap = 0;
         }
