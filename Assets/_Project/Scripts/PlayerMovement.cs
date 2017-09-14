@@ -38,18 +38,23 @@ public class PlayerMovement : MonoBehaviour {
 		if (rb2d.velocity.y == 0f && _jump) {
 			anim.SetTrigger ("Walk");
 			_jump = false;
-			GameControl.instance.JumpReady ();
-		}
+            GameControl.instance.jumpReady = true;
+        }
 	}
 
-	public void Jump(){
+    IEnumerator ResetJump()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _jump = true;
+    }
+
+    public void Jump(){
 		anim.SetTrigger ("Idle");
-		_jump = true;
-
-		rb2d.velocity = Vector2.zero;
-		rb2d.AddForce (new Vector2 (0, upForce));
+        GameControl.instance.jumpReady = false;
+        rb2d.velocity = Vector2.zero;
+        rb2d.AddForce (new Vector2 (0, upForce));
         audio.PlayOneShot(jumpSound);
-
+        StartCoroutine(ResetJump());
     }
 
 	public void BlobbyDied(){
