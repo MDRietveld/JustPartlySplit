@@ -1537,7 +1537,7 @@ GameObject:
   - component: {fileID: 911919314}
   m_Layer: 0
   m_Name: GroundV3
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1777,6 +1777,7 @@ MonoBehaviour:
   dieSound: {fileID: 8300000, guid: d5527989bf979944c80a6ca1baa9dc3c, type: 3}
   gameOver: 0
   scrollSpeed: -1.5
+  jumpReady: 0
   startGame: 1
   frontUpMap: 0
   backUpMap: 0
@@ -1909,7 +1910,7 @@ GameObject:
   - component: {fileID: 1025626561}
   m_Layer: 0
   m_Name: GroundV3_2
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
