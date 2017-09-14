@@ -22,31 +22,32 @@ public class GameControl : MonoBehaviour
 	public bool gameOver = false;     
 	public float scrollSpeed = -1f;
 
-	private bool _jumpReady = false;
+	public bool jumpReady = false;
+    private bool _jumpReady = false;
     public bool startGame = true;
 
 	PlayerMovement[] players;
 
 
 //    public int mapPoolSize = 3;
-	private GameObject[] superEasyMaps;
-    private GameObject[] easyMaps;
-    private GameObject[] mediumMaps;
-    private GameObject[] hardMaps;
-    private GameObject firstObject;
-	private int superEasyI;
-    private int easyI;
-    private int mediumI;
-    private int hardI;
-    private int rand;
+	//private GameObject[] superEasyMaps;
+ //   private GameObject[] easyMaps;
+ //   private GameObject[] mediumMaps;
+ //   private GameObject[] hardMaps;
+ //   private GameObject firstObject;
+	//private int superEasyI;
+ //   private int easyI;
+ //   private int mediumI;
+ //   private int hardI;
+ //   private int rand;
     //	public float spawnRate = 4f;
 
-    private GameObject[] maps;
-    private Vector2 objectPoolPosition = new Vector2(5f, 0);
+    //private GameObject[] maps;
+    //private Vector2 objectPoolPosition = new Vector2(5f, 0);
     //	private float timeSinceLastSpawned;
     //	private float spawnXPosition = 10f;
-    private int currentMap = 0;
-    private int loadedMaps = 0;
+    //private int currentMap = 0;
+    //private int loadedMaps = 0;
 
 	public int frontUpMap = 0;
 	public int backUpMap = 0;
@@ -63,16 +64,16 @@ public class GameControl : MonoBehaviour
 	{
 		if (instance == null){
 			audio = GetComponent<AudioSource> ();
-            maps = new GameObject[2];
-			superEasyMaps = Resources.LoadAll<GameObject>("PrefabMaps/SuperEasy");
-			superEasyI = superEasyMaps.GetLength(0);
-            easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
-            easyI = easyMaps.GetLength(0);
-            mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
-            mediumI = mediumMaps.GetLength(0);
-            hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
-            hardI = hardMaps.GetLength(0);
-			rand = Random.Range(0, superEasyI);
+   //         maps = new GameObject[2];
+			//superEasyMaps = Resources.LoadAll<GameObject>("PrefabMaps/SuperEasy");
+			//superEasyI = superEasyMaps.GetLength(0);
+   //         easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
+   //         easyI = easyMaps.GetLength(0);
+   //         mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
+   //         mediumI = mediumMaps.GetLength(0);
+   //         hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
+   //         hardI = hardMaps.GetLength(0);
+			//rand = Random.Range(0, superEasyI);
 
 
 			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun")) {
@@ -104,9 +105,10 @@ public class GameControl : MonoBehaviour
 			previousRunText.SetActive(false);
 			scoreText.enabled = true;
 			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
-			if (autoLoad)
-				maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
-			for (int i = 0; i < scrollingObjects.Length; i++) {
+            jumpReady = true;
+            //if (autoLoad)
+            //    maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+            for (int i = 0; i < scrollingObjects.Length; i++) {
 				scrollingObjects [i].enabled = true;
 			}
 
@@ -122,8 +124,7 @@ public class GameControl : MonoBehaviour
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 
-		if (Input.GetMouseButtonDown (0) && _jumpReady) {
-			_jumpReady = false;
+		if (Input.GetMouseButtonDown (0) && jumpReady) {
 			players = gameObject.GetComponentsInChildren<PlayerMovement>();
 			foreach (PlayerMovement player in players) {
 				player.Jump ();
@@ -134,30 +135,26 @@ public class GameControl : MonoBehaviour
 //		scoreText.text = "Score: " + score.ToString();
 	}
 
-    public void LoadMap()
-    {
-        if (currentMap == 0) {
-            currentMap = 1;					
-        }  else {
-            currentMap = 0;
-        }
-        if (loadedMaps < 5) {
-            rand = Random.Range(0, easyI);
-            maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-        else if(loadedMaps < 10) {
-            rand = Random.Range(0, mediumI);
-            maps[currentMap] = (GameObject)Instantiate(mediumMaps[rand], objectPoolPosition, Quaternion.identity);
-        } else {
-            rand = Random.Range(0, hardI);
-            maps[currentMap] = (GameObject)Instantiate(hardMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-        loadedMaps++;
-    }
-
-	public void JumpReady(){
-		_jumpReady = true;
-	}
+    //public void LoadMap()
+    //{
+    //    if (currentMap == 0) {
+    //        currentMap = 1;					
+    //    }  else {
+    //        currentMap = 0;
+    //    }
+    //    if (loadedMaps < 5) {
+    //        rand = Random.Range(0, easyI);
+    //        maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
+    //    }
+    //    else if(loadedMaps < 10) {
+    //        rand = Random.Range(0, mediumI);
+    //        maps[currentMap] = (GameObject)Instantiate(mediumMaps[rand], objectPoolPosition, Quaternion.identity);
+    //    } else {
+    //        rand = Random.Range(0, hardI);
+    //        maps[currentMap] = (GameObject)Instantiate(hardMaps[rand], objectPoolPosition, Quaternion.identity);
+    //    }
+    //    loadedMaps++;
+    //}
 
 
 	public void scoreCount()
@@ -186,7 +183,7 @@ public class GameControl : MonoBehaviour
 		}
 		PlayerPrefs.SetInt ("PreviousRun", score);
 
-		_jumpReady = false;
+		jumpReady = false;
 		gameOverText.SetActive (true);
 		gameOverText2.SetActive (true);
 		startText.enabled = true;
