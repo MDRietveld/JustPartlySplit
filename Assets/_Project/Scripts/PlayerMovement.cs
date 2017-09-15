@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	private Animator anim;
 	public Text gameOverText;
 
+
 	private bool _jump = true;
 
 	// Use this for initialization
@@ -59,16 +60,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void BlobbyDied(){
 		anim.SetTrigger ("Dead");
-        arrowToTheKnee = true;
+		arrowToTheKnee = true;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision){
 //		Collider2D collider = collision.collider;
 		if(collision.gameObject.tag == "Obstacle") {
-			anim.SetTrigger ("Dead");
+			anim.SetTrigger ("Explode");
 			gameOverText.text = "Ohh snap, he vanished";
 			arrowToTheKnee = true;
-			Destroy(gameObject);
+			Destroy(gameObject, 0.3f);
 			GameControl.instance.GameOver ();
 		}
 	}
