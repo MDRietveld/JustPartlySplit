@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(){
-		anim.SetTrigger ("Idle");
+		anim.SetTrigger ("Jump");
         GameControl.instance.jumpReady = false;
         rb2d.velocity = Vector2.zero;
         rb2d.AddForce (new Vector2 (0, upForce));
