@@ -121,23 +121,30 @@ public class GameControl : MonoBehaviour
 			//...reload the current scene.
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
-
 	}
 
 	void Update()
 	{
 		if(startText.enabled == true)
 			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
+		
 		if (jumpReady && Input.GetMouseButtonDown(0)) {
-			players = gameObject.GetComponentsInChildren<PlayerMovement>();
-			if (!_first) {
-				foreach (PlayerMovement player in players) {
-					player.Jump ();
-				}
-			} else {
-				_first = false;
-			}
+			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
+			RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+			if (hit.collider != null) {
+				if (hit.collider.gameObject.name != "SoundButton" || hit.collider.gameObject.name != "PauseButton") {
+					players = gameObject.GetComponentsInChildren<PlayerMovement>();
+					if (!_first) {
+						foreach (PlayerMovement player in players) {
+							player.Jump ();
+						}
+					} else {
+						_first = false;
+					}
+				}
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
 	}
