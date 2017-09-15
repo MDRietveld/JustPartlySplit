@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour {
 			anim.SetTrigger ("Explode");
 			gameOverText.text = "Ohh snap, he vanished";
 			arrowToTheKnee = true;
-			Destroy(gameObject, 0.3f);
+			Destroy(gameObject, 0.2f);
 			GameControl.instance.GameOver ();
 		}
 	}
