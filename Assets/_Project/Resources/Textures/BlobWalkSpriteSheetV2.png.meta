@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 2aabd46b66d8840f0b863969a14cb5c4
-timeCreated: 1504599987
+guid: 6862781d416c7634dbfe2cf90c2eda8e
+timeCreated: 1505464704
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BlobSpriteSheetV1_0
-    21300002: BlobSpriteSheetV1_1
-    21300004: BlobSpriteSheetV1_2
-    21300006: BlobSpriteSheetV1_3
+    21300000: BlobWalkSpriteSheetV2_0
+    21300002: BlobWalkSpriteSheetV2_1
+    21300004: BlobWalkSpriteSheetV2_2
+    21300006: BlobWalkSpriteSheetV2_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -75,19 +75,11 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlobSpriteSheetV1_0
+      name: BlobWalkSpriteSheetV2_0
       rect:
         serializedVersion: 2
         x: 3
@@ -101,7 +93,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlobSpriteSheetV1_1
+      name: BlobWalkSpriteSheetV2_1
       rect:
         serializedVersion: 2
         x: 35
@@ -115,7 +107,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlobSpriteSheetV1_2
+      name: BlobWalkSpriteSheetV2_2
       rect:
         serializedVersion: 2
         x: 67
@@ -129,7 +121,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlobSpriteSheetV1_3
+      name: BlobWalkSpriteSheetV2_3
       rect:
         serializedVersion: 2
         x: 99
