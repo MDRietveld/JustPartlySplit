@@ -37,16 +37,10 @@ public class CoursesLoader : MonoBehaviour {
         }  else if (instance != this)
             Destroy(gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (GameControl.instance.autoLoad && startLoading && Input.GetMouseButtonDown(0)){
-            startLoading = false;
-            maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-            
 
-    }
+	public void FirstCourse(){
+		maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+	}
 
     public void LoadMap()
     {
