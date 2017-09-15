@@ -10,7 +10,7 @@ public class CoursesLoader : MonoBehaviour {
     private GameObject[] hardMaps;
     private GameObject[] maps;
     private GameObject firstObject;
-    private Vector2 objectPoolPosition = new Vector2(5f, 0);
+    private Vector2 objectPoolPosition = new Vector2(6f, 0);
     private int superEasyI;
     private int easyI;
     private int mediumI;
@@ -44,7 +44,6 @@ public class CoursesLoader : MonoBehaviour {
 
     public void LoadMap()
     {
-        Debug.Log("Also here");
         if (currentMap == 0)
         {
             currentMap = 1;
