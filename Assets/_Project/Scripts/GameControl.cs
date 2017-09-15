@@ -77,13 +77,13 @@ public class GameControl : MonoBehaviour
 
 
 			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun")) {
-				highscoreText.GetComponent<Text>().text = "Highscore: " + PlayerPrefs.GetInt ("Highscore");
-				previousRunText.GetComponent<Text>().text = "Last Run: " + PlayerPrefs.GetInt("PreviousRun");
-			} else {
+                highscoreText.GetComponentInChildren<Text>().text = "Highscore \n" + PlayerPrefs.GetInt("Highscore");
+				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n" + PlayerPrefs.GetInt("PreviousRun");
+            } else {
 				PlayerPrefs.SetInt ("Highscore", 0);
 				PlayerPrefs.SetInt ("PreviousRun", 0);
-				highscoreText.GetComponent<Text>().text = "Highscore: 0";
-				previousRunText.GetComponent<Text>().text = "Highscore: 0";
+				highscoreText.GetComponentInChildren<Text>().text = "Highscore \n0";
+				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n0";
 			}
 
             instance = this;
