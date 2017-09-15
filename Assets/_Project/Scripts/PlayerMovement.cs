@@ -37,10 +37,17 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 		if (rb2d.velocity.y == 0f && _jump) {
-			anim.SetTrigger ("Walk");
+//			if (arrowToTheKnee != true) {
+//				anim.SetTrigger ("Walk");
+//			}
 			_jump = false;
             GameControl.instance.jumpReady = true;
         }
+		if (arrowToTheKnee != true && rb2d.velocity.y == 0f) {
+			anim.SetTrigger ("Walk");
+		}else if(arrowToTheKnee != true && rb2d.velocity.y != 0f){
+			anim.SetTrigger ("Jump");
+		}
 	}
 
     IEnumerator ResetJump()
@@ -50,7 +57,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(){
-		anim.SetTrigger ("Jump");
+		if (arrowToTheKnee != true) {
+			anim.SetTrigger ("Jump");
+		}
         GameControl.instance.jumpReady = false;
         rb2d.velocity = Vector2.zero;
         rb2d.AddForce (new Vector2 (0, upForce));

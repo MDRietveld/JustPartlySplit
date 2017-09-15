@@ -19,7 +19,7 @@ public class CoursesLoader : MonoBehaviour {
     private int currentMap = 0;
     private int loadedMaps = 0;
 
-    private bool startLoading = true;
+//    private bool startLoading = true;
     // Use this for initialization
     void Awake () {
         if (instance == null) {
