@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212734520046357868}
   - component: {fileID: 50827067394541140}
   - component: {fileID: 61647926088531904}
-  - component: {fileID: 114335737252112438}
   m_Layer: 0
   m_Name: SpikesSmallUp
   m_TagString: Obstacle
@@ -88,18 +87,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32006216, y: 0.2792582}
   m_EdgeRadius: 0
---- !u!114 &114335737252112438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1962630205662170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212734520046357868
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212583347037424880}
   - component: {fileID: 50242398654936036}
   - component: {fileID: 61001597087925600}
-  - component: {fileID: 114409435867725278}
   m_Layer: 0
   m_Name: UpSpikes (7)
   m_TagString: Obstacle
@@ -41,7 +40,6 @@ GameObject:
   - component: {fileID: 212506042072782390}
   - component: {fileID: 50470914828709070}
   - component: {fileID: 61695548777033432}
-  - component: {fileID: 114475869487191626}
   m_Layer: 0
   m_Name: UpSpikes (3)
   m_TagString: Obstacle
@@ -60,7 +58,6 @@ GameObject:
   - component: {fileID: 212917123139200704}
   - component: {fileID: 50434081277643086}
   - component: {fileID: 61591444782937962}
-  - component: {fileID: 114010392509759142}
   m_Layer: 0
   m_Name: UpSpikes (9)
   m_TagString: Obstacle
@@ -79,7 +76,6 @@ GameObject:
   - component: {fileID: 212081895377433632}
   - component: {fileID: 50448730922690500}
   - component: {fileID: 61192521899961648}
-  - component: {fileID: 114660210993898436}
   m_Layer: 0
   m_Name: UpSpikes (1)
   m_TagString: Obstacle
@@ -98,7 +94,6 @@ GameObject:
   - component: {fileID: 212056615226471276}
   - component: {fileID: 50982537113433198}
   - component: {fileID: 61569001464009708}
-  - component: {fileID: 114126914079415430}
   m_Layer: 0
   m_Name: UpSpikes (8)
   m_TagString: Obstacle
@@ -117,7 +112,6 @@ GameObject:
   - component: {fileID: 212088198546398582}
   - component: {fileID: 50772874995674468}
   - component: {fileID: 61626556079718570}
-  - component: {fileID: 114192482173212240}
   m_Layer: 0
   m_Name: UpSpikes (2)
   m_TagString: Obstacle
@@ -136,7 +130,6 @@ GameObject:
   - component: {fileID: 212363826420547062}
   - component: {fileID: 50490192804201638}
   - component: {fileID: 61754337377221684}
-  - component: {fileID: 114089018068066756}
   m_Layer: 0
   m_Name: UpSpikes (5)
   m_TagString: Obstacle
@@ -170,7 +163,6 @@ GameObject:
   - component: {fileID: 212404136720964858}
   - component: {fileID: 50695722849854328}
   - component: {fileID: 61570190574676976}
-  - component: {fileID: 114321922907573902}
   m_Layer: 0
   m_Name: UpSpikes
   m_TagString: Obstacle
@@ -189,7 +181,6 @@ GameObject:
   - component: {fileID: 212019667145861558}
   - component: {fileID: 50654719444837516}
   - component: {fileID: 61176341772213802}
-  - component: {fileID: 114535748945785978}
   m_Layer: 0
   m_Name: UpSpikes (4)
   m_TagString: Obstacle
@@ -208,7 +199,6 @@ GameObject:
   - component: {fileID: 212136973202047052}
   - component: {fileID: 50182767130211582}
   - component: {fileID: 61674511655766446}
-  - component: {fileID: 114119123955961968}
   m_Layer: 0
   m_Name: UpSpikes (6)
   m_TagString: Obstacle
@@ -819,126 +809,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.58}
   m_EdgeRadius: 0
---- !u!114 &114010392509759142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1436339729057896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114089018068066756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885964871271910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114119123955961968
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1985362058662608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114126914079415430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1482491848460820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114192482173212240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1574396905304698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114321922907573902
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1945038825995658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114409435867725278
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1160101469042406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114475869487191626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1215157450695040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114535748945785978
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1963665077294180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114660210993898436
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442261320057798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212019667145861558
 SpriteRenderer:
   m_ObjectHideFlags: 1

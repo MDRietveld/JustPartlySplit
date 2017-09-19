@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour {
 	private Animator anim;
 	public Text gameOverText;
 
-
 	private bool _jump = true;
 
 	// Use this for initialization
@@ -37,9 +36,6 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 		if (rb2d.velocity.y == 0f && _jump) {
-//			if (arrowToTheKnee != true) {
-//				anim.SetTrigger ("Walk");
-//			}
 			_jump = false;
             GameControl.instance.jumpReady = true;
         }
@@ -80,6 +76,12 @@ public class PlayerMovement : MonoBehaviour {
 			arrowToTheKnee = true;
 			Destroy(gameObject, 0.2f);
 			GameControl.instance.GameOver ();
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision){
+		if (CanvasController.instance.speak && collision.gameObject.tag != CanvasController.instance.previous) {
+			CanvasController.instance.mayISpeak (collision.gameObject.tag);
 		}
 	}
 }

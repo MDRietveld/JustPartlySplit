@@ -35,43 +35,32 @@ public class RepeatingBackground : MonoBehaviour
 	private void RepositionBackground()
 	{
         // Count for back background
-        if (gameObject.tag == "BBGUp")
-        {
+        if (gameObject.tag == "BBGUp") {
             GameControl.instance.backUpMap++;
             repeatedBackMap = GameControl.instance.backUpMap;
         }
         // Count for front background
-        if (gameObject.tag == "FBGUp")
-        {
+        if (gameObject.tag == "FBGUp") {
             GameControl.instance.frontUpMap++;
             repeatedFrontMap = GameControl.instance.frontUpMap;
         }
-        if (gameObject.tag == "BBGDown")
-        {
+        if (gameObject.tag == "BBGDown") {
             GameControl.instance.backDownMap++;
             repeatedBackMap = GameControl.instance.backDownMap;
         }
         // Count for front background
-        if (gameObject.tag == "FBGDown")
-        {
+        if (gameObject.tag == "FBGDown") {
             GameControl.instance.frontDownMap++;
             repeatedFrontMap = GameControl.instance.frontDownMap;
         }
 
-        if (gameObject.tag == "BBGDown" && repeatedBackMap == 1)
-        {
+        if (gameObject.tag == "BBGDown" && repeatedBackMap == 1) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackDown1.5", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "BBGUp" && repeatedBackMap == 1)
-        {
+        } else if (gameObject.tag == "BBGUp" && repeatedBackMap == 1) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackUp1.5", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "BBGDown" && (repeatedBackMap == 2 || repeatedBackMap == 3))
-        {
+        } else if (gameObject.tag == "BBGDown" && (repeatedBackMap == 2 || repeatedBackMap == 3)) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackDown2", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "BBGUp" && (repeatedBackMap == 2 || repeatedBackMap == 3))
-        {
+        } else if (gameObject.tag == "BBGUp" && (repeatedBackMap == 2 || repeatedBackMap == 3)) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackUp2", typeof(Sprite)) as Sprite;
         }
 
