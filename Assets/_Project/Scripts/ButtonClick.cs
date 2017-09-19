@@ -4,6 +4,13 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class ButtonClick : MonoBehaviour {
+
+	void Start(){
+		if (gameObject.tag == "Volume" && AudioListener.volume == 0) {
+			GetComponent<Button> ().image.overrideSprite = Resources.Load ("Textures/SoundOff", typeof(Sprite)) as Sprite;
+		}
+	}
+
 	void OnMouseDown() {
 
 		if (gameObject.tag == "Pause") {

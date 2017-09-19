@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212750841476051830}
   - component: {fileID: 50306839373285666}
   - component: {fileID: 61336390008041966}
-  - component: {fileID: 114048387570217222}
   m_Layer: 0
   m_Name: RightSpikes
   m_TagString: Obstacle
@@ -88,18 +87,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.58}
   m_EdgeRadius: 0
---- !u!114 &114048387570217222
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1280311786969122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212750841476051830
 SpriteRenderer:
   m_ObjectHideFlags: 1

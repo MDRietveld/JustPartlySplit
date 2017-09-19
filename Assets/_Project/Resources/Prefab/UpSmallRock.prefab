@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4603845989751978}
   - component: {fileID: 212992343227948238}
   - component: {fileID: 50940466951380864}
-  - component: {fileID: 114102283827863240}
   - component: {fileID: 60140612252181256}
   m_Layer: 0
   m_Name: UpSmallRock
@@ -103,18 +102,6 @@ PolygonCollider2D:
       - {x: 0.17356777, y: 0.014848709}
       - {x: 0.15302086, y: 0.08420658}
       - {x: 0.12390423, y: 0.1293577}
---- !u!114 &114102283827863240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848502762183716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212992343227948238
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212018916763601706}
   - component: {fileID: 50421626264893750}
   - component: {fileID: 61373187579924858}
-  - component: {fileID: 114850095701046702}
   m_Layer: 0
   m_Name: RightSpikes
   m_TagString: Obstacle
@@ -56,7 +55,6 @@ GameObject:
   - component: {fileID: 212756674648624794}
   - component: {fileID: 50671618723712752}
   - component: {fileID: 61759482492752640}
-  - component: {fileID: 114502519002002810}
   m_Layer: 0
   m_Name: LeftSpikes
   m_TagString: Obstacle
@@ -86,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1965959626060982}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 15.26, y: 0.42, z: 10}
+  m_LocalPosition: {x: 15.26, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4031867612335948}
@@ -99,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1025008091114650}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 15.84, y: 0.42, z: 10}
+  m_LocalPosition: {x: 15.84, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4031867612335948}
@@ -195,30 +193,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.58}
   m_EdgeRadius: 0
---- !u!114 &114502519002002810
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1965959626060982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
---- !u!114 &114850095701046702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1025008091114650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212018916763601706
 SpriteRenderer:
   m_ObjectHideFlags: 1
