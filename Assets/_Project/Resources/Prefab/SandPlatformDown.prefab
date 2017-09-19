@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 50529494820238670}
   - component: {fileID: 61148808736216560}
   - component: {fileID: 251959194505137298}
-  - component: {fileID: 114302053963295002}
   m_Layer: 0
   m_Name: SandPlatformDown
   m_TagString: Floor
@@ -89,18 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.04, y: 0.18}
   m_EdgeRadius: 0
---- !u!114 &114302053963295002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1616924790065978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212162283640155832
 SpriteRenderer:
   m_ObjectHideFlags: 1

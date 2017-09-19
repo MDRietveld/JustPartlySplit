@@ -104,8 +104,8 @@ public class GameControl : MonoBehaviour
 			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
 			pauseButton.SetActive (true);
 			jumpReady = true;
-			CoursesLoader.instance.FirstCourse ();
-			//if (autoLoad)
+			if (autoLoad)
+				CoursesLoader.instance.FirstCourse ();
 			//    maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
 			for (int i = 0; i < scrollingObjects.Length; i++) {
 				scrollingObjects [i].enabled = true;
@@ -127,7 +127,6 @@ public class GameControl : MonoBehaviour
 	{
 		if(startText.enabled == true)
 			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
-		
 		if (jumpReady && Input.GetMouseButtonDown(0)) {
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
@@ -147,6 +146,14 @@ public class GameControl : MonoBehaviour
 			}
 		}
 		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+	}
+
+	public void setJumpReady(){
+		if (!jumpReady) {
+			Debug.Log ("Jump Ready!");
+
+			jumpReady = true;
+		}
 	}
 
     //public void LoadMap()

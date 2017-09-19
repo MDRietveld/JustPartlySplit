@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 61802758213945216}
   - component: {fileID: 50900469104003524}
   - component: {fileID: 251101212483117444}
-  - component: {fileID: 114704835878820132}
   m_Layer: 0
   m_Name: UpBox
   m_TagString: Untagged
@@ -89,18 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6335077, y: 0.6347307}
   m_EdgeRadius: 0
---- !u!114 &114704835878820132
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1778761556246840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212107565552678074
 SpriteRenderer:
   m_ObjectHideFlags: 1
