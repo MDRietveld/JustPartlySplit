@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour 
 {
 	public static GameControl instance;         
-	                      
+
+	public GameObject pauseButton;
 	public GameObject gameOverText;
 	public GameObject gameOverText2;
 	public GameObject highscoreText;
@@ -23,8 +24,9 @@ public class GameControl : MonoBehaviour
 	public float scrollSpeed = -1f;
 
 	public bool jumpReady = false;
-    private bool _jumpReady = false;
+//    private bool _jumpReady = false;
     public bool startGame = true;
+	private bool _first = true;
 
 	PlayerMovement[] players;
 
@@ -58,6 +60,7 @@ public class GameControl : MonoBehaviour
 
 	[Header("DISABLE this to test maps")]
 	public bool autoLoad = true;
+
     
 
     void Awake()
@@ -91,48 +94,66 @@ public class GameControl : MonoBehaviour
 			Destroy (gameObject);
 	}
 
-	void Update()
-	{
-		
-		if(startText.enabled == true)
-			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
-		
-		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
-        if (startGame && Input.GetMouseButtonDown(0)){
-            startGame = false;
-            startText.enabled = false;
+	void OnMouseDown(){
+		if (startGame){
+			startGame = false;
+			startText.enabled = false;
 			highscoreText.SetActive(false);
 			previousRunText.SetActive(false);
 			scoreText.enabled = true;
 			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
-            jumpReady = true;
-            //if (autoLoad)
-            //    maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
-            for (int i = 0; i < scrollingObjects.Length; i++) {
+			pauseButton.SetActive (true);
+			jumpReady = true;
+			if (autoLoad)
+				CoursesLoader.instance.FirstCourse ();
+			//    maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+			for (int i = 0; i < scrollingObjects.Length; i++) {
 				scrollingObjects [i].enabled = true;
 			}
 
 
 			InvokeRepeating("scoreCount", 1.5f, 1.5f);
 			return;
-        } else if (startGame) {
-            return;
-        }
-        //If the game is over and the player has pressed some input...
-        if (gameOver && Input.GetMouseButtonUp(0)) {
+		} else if (startGame) {
+			return;
+		}
+		if (gameOver) {
 			//...reload the current scene.
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
+	}
 
-		if (Input.GetMouseButtonDown (0) && jumpReady) {
-			players = gameObject.GetComponentsInChildren<PlayerMovement>();
-			foreach (PlayerMovement player in players) {
-				player.Jump ();
+	void Update()
+	{
+		if(startText.enabled == true)
+			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
+		if (jumpReady && Input.GetMouseButtonDown(0)) {
+			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+			RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+			if (hit.collider != null) {
+				if (hit.collider.gameObject.name != "SoundButton" || hit.collider.gameObject.name != "PauseButton") {
+					players = gameObject.GetComponentsInChildren<PlayerMovement>();
+					if (!_first) {
+						foreach (PlayerMovement player in players) {
+							player.Jump ();
+						}
+					} else {
+						_first = false;
+					}
+				}
 			}
 		}
+		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+	}
 
-//		score++;
-//		scoreText.text = "Score: " + score.ToString();
+	public void setJumpReady(){
+		if (!jumpReady) {
+			Debug.Log ("Jump Ready!");
+
+			jumpReady = true;
+		}
 	}
 
     //public void LoadMap()
@@ -184,6 +205,7 @@ public class GameControl : MonoBehaviour
 		PlayerPrefs.SetInt ("PreviousRun", score);
 
 		jumpReady = false;
+		pauseButton.SetActive (false);
 		gameOverText.SetActive (true);
 		gameOverText2.SetActive (true);
 		startText.enabled = true;

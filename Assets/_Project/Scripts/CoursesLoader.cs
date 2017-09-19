@@ -10,7 +10,7 @@ public class CoursesLoader : MonoBehaviour {
     private GameObject[] hardMaps;
     private GameObject[] maps;
     private GameObject firstObject;
-    private Vector2 objectPoolPosition = new Vector2(5f, 0);
+    private Vector2 objectPoolPosition = new Vector2(6f, 0);
     private int superEasyI;
     private int easyI;
     private int mediumI;
@@ -19,7 +19,7 @@ public class CoursesLoader : MonoBehaviour {
     private int currentMap = 0;
     private int loadedMaps = 0;
 
-    private bool startLoading = true;
+//    private bool startLoading = true;
     // Use this for initialization
     void Awake () {
         if (instance == null) {
@@ -37,20 +37,13 @@ public class CoursesLoader : MonoBehaviour {
         }  else if (instance != this)
             Destroy(gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (GameControl.instance.autoLoad && startLoading && Input.GetMouseButtonDown(0)){
-            startLoading = false;
-            maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-            
 
-    }
+	public void FirstCourse(){
+		maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
+	}
 
     public void LoadMap()
     {
-        Debug.Log("Also here");
         if (currentMap == 0)
         {
             currentMap = 1;

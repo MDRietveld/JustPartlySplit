@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 50872278938193360}
   - component: {fileID: 61858985429342506}
   - component: {fileID: 251709907187289250}
-  - component: {fileID: 114995717187979984}
   m_Layer: 0
   m_Name: BluePlatformL
   m_TagString: Floor
@@ -89,18 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.04, y: 0.18}
   m_EdgeRadius: 0
---- !u!114 &114995717187979984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1170345567645788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212834591554742868
 SpriteRenderer:
   m_ObjectHideFlags: 1

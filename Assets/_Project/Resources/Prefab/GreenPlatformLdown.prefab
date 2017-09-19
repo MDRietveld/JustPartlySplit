@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 50929479922727920}
   - component: {fileID: 61853495689091500}
   - component: {fileID: 251362334710823102}
-  - component: {fileID: 114825602550151492}
   m_Layer: 0
   m_Name: GreenPlatformLdown
   m_TagString: Floor
@@ -89,18 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.04, y: 0.18}
   m_EdgeRadius: 0
---- !u!114 &114825602550151492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1727031711474286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!212 &212810550718303480
 SpriteRenderer:
   m_ObjectHideFlags: 1

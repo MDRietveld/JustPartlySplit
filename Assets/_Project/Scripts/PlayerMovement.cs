@@ -36,10 +36,14 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 		if (rb2d.velocity.y == 0f && _jump) {
-			anim.SetTrigger ("Walk");
 			_jump = false;
             GameControl.instance.jumpReady = true;
         }
+		if (arrowToTheKnee != true && rb2d.velocity.y == 0f) {
+			anim.SetTrigger ("Walk");
+		}else if(arrowToTheKnee != true && rb2d.velocity.y != 0f){
+			anim.SetTrigger ("Jump");
+		}
 	}
 
     IEnumerator ResetJump()
@@ -49,7 +53,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(){
-		anim.SetTrigger ("Idle");
+		if (arrowToTheKnee != true) {
+			anim.SetTrigger ("Jump");
+		}
         GameControl.instance.jumpReady = false;
         rb2d.velocity = Vector2.zero;
         rb2d.AddForce (new Vector2 (0, upForce));
@@ -59,17 +65,23 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void BlobbyDied(){
 		anim.SetTrigger ("Dead");
-        arrowToTheKnee = true;
+		arrowToTheKnee = true;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision){
 //		Collider2D collider = collision.collider;
 		if(collision.gameObject.tag == "Obstacle") {
-			anim.SetTrigger ("Dead");
+			anim.SetTrigger ("Explode");
 			gameOverText.text = "Ohh snap, he vanished";
 			arrowToTheKnee = true;
-			Destroy(gameObject);
+			Destroy(gameObject, 0.2f);
 			GameControl.instance.GameOver ();
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision){
+		if (CanvasController.instance.speak && collision.gameObject.tag != CanvasController.instance.previous) {
+			CanvasController.instance.mayISpeak (collision.gameObject.tag);
 		}
 	}
 }
