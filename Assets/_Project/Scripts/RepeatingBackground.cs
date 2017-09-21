@@ -6,19 +6,9 @@ using System.Collections;
 public class RepeatingBackground : MonoBehaviour 
 {
 
-	private BoxCollider2D groundCollider;       //This stores a reference to the collider attached to the Ground.
-//	private float groundHorizontalLength;       //A float to store the x-axis length of the collider2D attached to the Ground GameObject.
+	private BoxCollider2D groundCollider;
 	private int repeatedBackMap = 0;
 	private int repeatedFrontMap = 0;
-	//Awake is called before Start.
-	private void Awake ()
-	{
-		//Get and store a reference to the collider2D attached to Ground.
-
-//		groundCollider = GetComponent<BoxCollider2D> ();
-		//Store the size of the collider along the x axis (its length in units).
-//		groundHorizontalLength = groundCollider.size.x;
-	}
 
 	//Update runs once per frame
 	private void Update()
