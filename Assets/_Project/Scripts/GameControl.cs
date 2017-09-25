@@ -15,6 +15,8 @@ public class GameControl : MonoBehaviour
 	public GameObject previousRunText;
 	public GameObject startPanel;
 	public GameObject statsPanel;
+	public GameObject restartPanel;
+	public GameObject backPanel;
 	public GameObject allStatisticsPanel;
 	public Text scoreText;
     public Text startText;
@@ -81,13 +83,34 @@ public class GameControl : MonoBehaviour
 
 	void Update()
 	{
+		if(PlayerPrefs.GetInt ("RestartGame") == 1 && startGame){
+			PlayerPrefs.SetInt ("RestartGame", 0);
+			startGame = false;
+			startPanel.SetActive(false);
+			statsPanel.SetActive(false);
+			highscoreText.SetActive(false);
+			previousRunText.SetActive(false);
+			scoreText.enabled = true;
+			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
+			pauseButton.SetActive (true);
+			jumpReady = true;
+			if (autoLoad)
+				CoursesLoader.instance.FirstCourse ();
+			for (int i = 0; i < scrollingObjects.Length; i++) {
+				scrollingObjects [i].enabled = true;
+			}
+
+			InvokeRepeating("scoreCount", 1.5f, 1.5f);
+			return;
+		}
+
 		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
 		if (Input.GetMouseButtonDown (0)) {
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			Vector2 mousePos2D = new Vector2 (mousePos.x, mousePos.y);
 
 			RaycastHit2D hit = Physics2D.Raycast (mousePos2D, Vector2.zero);
-//			Debug.Log (hit.collider.gameObject.tag);
+			Debug.Log (hit.collider.gameObject.tag);
 			if (hit.collider != null) {
 				if (hit.collider.gameObject.tag != "Volume" && hit.collider.gameObject.tag != "Pause" && jumpReady) {
 					players = gameObject.GetComponentsInChildren<PlayerMovement> ();
@@ -133,12 +156,21 @@ public class GameControl : MonoBehaviour
 					highscoreText.SetActive(true);
 					previousRunText.SetActive(true);
 					allStatisticsPanel.SetActive(false);
+				}else if(hit.collider.gameObject.tag == "MainMenu"){
+					if (gameOver) {
+						//...reload the current scene.
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+					}
+				}else if(hit.collider.gameObject.tag == "RestartGame"){
+					PlayerPrefs.SetInt ("RestartGame", 1);
+					if (gameOver) {
+						//...reload the current scene.
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+					}
 				}
+
 			}
-			if (gameOver) {
-				//...reload the current scene.
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-			}
+
 		}
 //		if(startText.enabled == true)
 //			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
@@ -179,8 +211,10 @@ public class GameControl : MonoBehaviour
 		pauseButton.SetActive (false);
 		gameOverText.SetActive (true);
 		gameOverText2.SetActive (true);
-		startText.enabled = true;
-		startText.text = "Tap to reset";
+		restartPanel.SetActive (true);
+		backPanel.SetActive (true);
+//		startText.enabled = true;
+//		startText.text = "Tap to reset";
 		players = gameObject.GetComponentsInChildren<PlayerMovement>();
 		foreach (PlayerMovement player in players) {
 			player.BlobbyDied ();
