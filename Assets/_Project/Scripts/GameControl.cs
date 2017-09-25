@@ -65,8 +65,8 @@ public class GameControl : MonoBehaviour
 
 			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun") && PlayerPrefs.HasKey("VolumeSetting")) {
 				AudioListener.volume = PlayerPrefs.GetInt("VolumeSetting");
-                highscoreText.GetComponentInChildren<Text>().text = "Highscore \n" + PlayerPrefs.GetInt("Highscore");
-				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n" + PlayerPrefs.GetInt("PreviousRun");
+				highscoreText.GetComponentInChildren<Text>().text = "Highscore \n" + (string.Format("{0:0,0}", PlayerPrefs.GetInt("Highscore"))).Replace(",", ".");
+				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n" + (string.Format("{0:0,0}", PlayerPrefs.GetInt("PreviousRun"))).Replace(",", ".");
             } else {
 				PlayerPrefs.SetInt ("Highscore", 0);
 				PlayerPrefs.SetInt ("PreviousRun", 0);
@@ -114,11 +114,12 @@ public class GameControl : MonoBehaviour
 					InvokeRepeating("scoreCount", 1.5f, 1.5f);
 					return;
 				}else if(hit.collider.gameObject.tag == "ShowStats"){
+					
 					allStatisticsNumbersText.text = "\n"+
-						PlayerPrefs.GetInt("TotalJumps")	+"\n"+
-						PlayerPrefs.GetInt("TotalDeaths")	+"\n"+
-						PlayerPrefs.GetInt("TotalScore")	+"\n"+
-						PlayerPrefs.GetInt("AvarageScore")	+"\n";
+						(string.Format("{0:0,0}", PlayerPrefs.GetInt("TotalJumps"))).Replace(",", ".")	+"\n"+
+						(string.Format("{0:0,0}", PlayerPrefs.GetInt("TotalDeaths"))).Replace(",", ".")	+"\n"+
+						(string.Format("{0:0,0}", PlayerPrefs.GetInt("TotalScore"))).Replace(",", ".")	+"\n"+
+						(string.Format("{0:0,0}", PlayerPrefs.GetInt("AvarageScore"))).Replace(",", ".")	+"\n";
 					startPanel.SetActive(false);
 					statsPanel.SetActive(false);
 					volumeButton.SetActive(false);
