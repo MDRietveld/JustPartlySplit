@@ -24,10 +24,12 @@ public class ButtonClick : MonoBehaviour {
 		} else if (gameObject.tag == "Volume"){
 			if (AudioListener.volume == 1) {
 				GetComponent<Button> ().image.overrideSprite = Resources.Load ("Textures/SoundOff", typeof(Sprite)) as Sprite;
+				PlayerPrefs.SetInt ("VolumeSetting", 0);
 				AudioListener.volume = 0;
 			} else {
 				GetComponent<Button> ().image.overrideSprite = Resources.Load ("Textures/SoundOn", typeof(Sprite)) as Sprite;
 				AudioListener.volume = 1;
+				PlayerPrefs.SetInt ("VolumeSetting", 1);
 			}
 		}
 

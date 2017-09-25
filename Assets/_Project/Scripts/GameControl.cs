@@ -8,16 +8,22 @@ public class GameControl : MonoBehaviour
 	public static GameControl instance;         
 
 	public GameObject pauseButton;
+	public GameObject volumeButton;
 	public GameObject gameOverText;
 	public GameObject gameOverText2;
 	public GameObject highscoreText;
 	public GameObject previousRunText;
+	public GameObject startPanel;
+	public GameObject statsPanel;
+	public GameObject allStatisticsPanel;
 	public Text scoreText;
     public Text startText;
+	public Text allStatisticsNumbersText;
 
 
 	private AudioSource audio;
 	public AudioClip dieSound;
+	public AudioClip landSound;
 
     private int score = 0;            
 	public bool gameOver = false;     
@@ -29,27 +35,6 @@ public class GameControl : MonoBehaviour
 	private bool _first = true;
 
 	PlayerMovement[] players;
-
-
-//    public int mapPoolSize = 3;
-	//private GameObject[] superEasyMaps;
- //   private GameObject[] easyMaps;
- //   private GameObject[] mediumMaps;
- //   private GameObject[] hardMaps;
- //   private GameObject firstObject;
-	//private int superEasyI;
- //   private int easyI;
- //   private int mediumI;
- //   private int hardI;
- //   private int rand;
-    //	public float spawnRate = 4f;
-
-    //private GameObject[] maps;
-    //private Vector2 objectPoolPosition = new Vector2(5f, 0);
-    //	private float timeSinceLastSpawned;
-    //	private float spawnXPosition = 10f;
-    //private int currentMap = 0;
-    //private int loadedMaps = 0;
 
 	public int frontUpMap = 0;
 	public int backUpMap = 0;
@@ -67,19 +52,19 @@ public class GameControl : MonoBehaviour
 	{
 		if (instance == null){
 			audio = GetComponent<AudioSource> ();
-   //         maps = new GameObject[2];
-			//superEasyMaps = Resources.LoadAll<GameObject>("PrefabMaps/SuperEasy");
-			//superEasyI = superEasyMaps.GetLength(0);
-   //         easyMaps = Resources.LoadAll<GameObject>("PrefabMaps/Easy");
-   //         easyI = easyMaps.GetLength(0);
-   //         mediumMaps = Resources.LoadAll<GameObject>("PrefabMaps/Medium");
-   //         mediumI = mediumMaps.GetLength(0);
-   //         hardMaps = Resources.LoadAll<GameObject>("PrefabMaps/Hard");
-   //         hardI = hardMaps.GetLength(0);
-			//rand = Random.Range(0, superEasyI);
 
+			if (!PlayerPrefs.HasKey ("TotalJumps") && !PlayerPrefs.HasKey ("TotalScore") && !PlayerPrefs.HasKey ("AvarageScore") && !PlayerPrefs.HasKey ("TotalMaps") && !PlayerPrefs.HasKey ("TotalDeaths") && !PlayerPrefs.HasKey ("TotalCoins") && !PlayerPrefs.HasKey ("CurrentCoins")) {
+				PlayerPrefs.SetInt ("TotalJumps", 0);
+				PlayerPrefs.SetInt ("TotalScore", 0);
+				PlayerPrefs.SetInt ("AvarageScore", 0);
+				PlayerPrefs.SetInt ("TotalMaps", 0);
+				PlayerPrefs.SetInt ("TotalDeaths", 0);
+				PlayerPrefs.SetInt ("TotalCoins", 0);
+				PlayerPrefs.SetInt ("CurrentCoins", 0);
+			}
 
-			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun")) {
+			if (PlayerPrefs.HasKey ("Highscore") && PlayerPrefs.HasKey("PreviousRun") && PlayerPrefs.HasKey("VolumeSetting")) {
+				AudioListener.volume = PlayerPrefs.GetInt("VolumeSetting");
                 highscoreText.GetComponentInChildren<Text>().text = "Highscore \n" + PlayerPrefs.GetInt("Highscore");
 				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n" + PlayerPrefs.GetInt("PreviousRun");
             } else {
@@ -94,106 +79,89 @@ public class GameControl : MonoBehaviour
 			Destroy (gameObject);
 	}
 
-	void OnMouseDown(){
-		if (startGame){
-			startGame = false;
-			startText.enabled = false;
-			highscoreText.SetActive(false);
-			previousRunText.SetActive(false);
-			scoreText.enabled = true;
-			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
-			pauseButton.SetActive (true);
-			jumpReady = true;
-			if (autoLoad)
-				CoursesLoader.instance.FirstCourse ();
-			//    maps[currentMap] = (GameObject)Instantiate(superEasyMaps[rand], objectPoolPosition, Quaternion.identity);
-			for (int i = 0; i < scrollingObjects.Length; i++) {
-				scrollingObjects [i].enabled = true;
-			}
-
-
-			InvokeRepeating("scoreCount", 1.5f, 1.5f);
-			return;
-		} else if (startGame) {
-			return;
-		}
-		if (gameOver) {
-			//...reload the current scene.
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-		}
-	}
-
 	void Update()
 	{
-		if(startText.enabled == true)
-			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
-		if (jumpReady && Input.GetMouseButtonDown(0)) {
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+		if (Input.GetMouseButtonDown (0)) {
+			Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			Vector2 mousePos2D = new Vector2 (mousePos.x, mousePos.y);
 
-			RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+			RaycastHit2D hit = Physics2D.Raycast (mousePos2D, Vector2.zero);
+//			Debug.Log (hit.collider.gameObject.tag);
 			if (hit.collider != null) {
-				if (hit.collider.gameObject.name != "SoundButton" || hit.collider.gameObject.name != "PauseButton") {
-					players = gameObject.GetComponentsInChildren<PlayerMovement>();
-					if (!_first) {
-						foreach (PlayerMovement player in players) {
-							player.Jump ();
-						}
-					} else {
-						_first = false;
+				if (hit.collider.gameObject.tag != "Volume" && hit.collider.gameObject.tag != "Pause" && jumpReady) {
+					players = gameObject.GetComponentsInChildren<PlayerMovement> ();
+					PlayerPrefs.SetInt ("TotalJumps", (PlayerPrefs.GetInt("TotalJumps") + 1));
+					foreach (PlayerMovement player in players) {
+						player.Jump ();
 					}
+				}else if(hit.collider.gameObject.tag == "StartGame" && startGame){
+					startGame = false;
+					startPanel.SetActive(false);
+					statsPanel.SetActive(false);
+					highscoreText.SetActive(false);
+					previousRunText.SetActive(false);
+					scoreText.enabled = true;
+					scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
+					pauseButton.SetActive (true);
+					jumpReady = true;
+					if (autoLoad)
+						CoursesLoader.instance.FirstCourse ();
+					for (int i = 0; i < scrollingObjects.Length; i++) {
+						scrollingObjects [i].enabled = true;
+					}
+
+					InvokeRepeating("scoreCount", 1.5f, 1.5f);
+					return;
+				}else if(hit.collider.gameObject.tag == "ShowStats"){
+					allStatisticsNumbersText.text = "\n"+
+						PlayerPrefs.GetInt("TotalJumps")	+"\n"+
+						PlayerPrefs.GetInt("TotalDeaths")	+"\n"+
+						PlayerPrefs.GetInt("TotalScore")	+"\n"+
+						PlayerPrefs.GetInt("AvarageScore")	+"\n";
+					startPanel.SetActive(false);
+					statsPanel.SetActive(false);
+					volumeButton.SetActive(false);
+					highscoreText.SetActive(false);
+					previousRunText.SetActive(false);
+					allStatisticsPanel.SetActive(true);
+				}else if(hit.collider.gameObject.tag == "CloseStats"){
+					startPanel.SetActive(true);
+					statsPanel.SetActive(true);
+					volumeButton.SetActive(true);
+					highscoreText.SetActive(true);
+					previousRunText.SetActive(true);
+					allStatisticsPanel.SetActive(false);
 				}
 			}
+			if (gameOver) {
+				//...reload the current scene.
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			}
 		}
-		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+//		if(startText.enabled == true)
+//			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
 	}
 
 	public void setJumpReady(){
 		if (!jumpReady) {
-			Debug.Log ("Jump Ready!");
-
+			audio.PlayOneShot(landSound);
 			jumpReady = true;
 		}
 	}
-
-    //public void LoadMap()
-    //{
-    //    if (currentMap == 0) {
-    //        currentMap = 1;					
-    //    }  else {
-    //        currentMap = 0;
-    //    }
-    //    if (loadedMaps < 5) {
-    //        rand = Random.Range(0, easyI);
-    //        maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
-    //    }
-    //    else if(loadedMaps < 10) {
-    //        rand = Random.Range(0, mediumI);
-    //        maps[currentMap] = (GameObject)Instantiate(mediumMaps[rand], objectPoolPosition, Quaternion.identity);
-    //    } else {
-    //        rand = Random.Range(0, hardI);
-    //        maps[currentMap] = (GameObject)Instantiate(hardMaps[rand], objectPoolPosition, Quaternion.identity);
-    //    }
-    //    loadedMaps++;
-    //}
-
 
 	public void scoreCount()
 	{
 		if (gameOver)   
 			return;
-		//If the game is not over, increase the score...
 		score += 50;
-		//...and adjust the score text.
 		scoreText.text = "Score: " + score.ToString();
 	}
 
 	public void coinPickup(){
 		if (gameOver)   
 			return;
-		//If the game is not over, increase the score...
 		score += 10;
-		//...and adjust the score text.
 		scoreText.text = "Score: " + score.ToString();
 	}
 
@@ -202,8 +170,10 @@ public class GameControl : MonoBehaviour
 		if (score > PlayerPrefs.GetInt("Highscore")){
 			PlayerPrefs.SetInt ("Highscore", score);
 		}
+		PlayerPrefs.SetInt ("TotalDeaths", (PlayerPrefs.GetInt("TotalDeaths") + 1));
 		PlayerPrefs.SetInt ("PreviousRun", score);
-
+		PlayerPrefs.SetInt ("TotalScore", (PlayerPrefs.GetInt("TotalScore") + score));
+		PlayerPrefs.SetInt ("AvarageScore", (PlayerPrefs.GetInt("TotalScore") / PlayerPrefs.GetInt("TotalDeaths")));
 		jumpReady = false;
 		pauseButton.SetActive (false);
 		gameOverText.SetActive (true);

@@ -56,7 +56,7 @@ public class CanvasController : MonoBehaviour {
 
 			Destroy (topText, 3f);
 			Destroy (bottomText, 3f);
-			LetMeSpeak ();
+			StartCoroutine(LetMeSpeak ());
 		}
 	}
 

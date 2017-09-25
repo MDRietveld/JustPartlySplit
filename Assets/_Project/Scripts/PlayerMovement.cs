@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (rb2d.velocity.y == 0f && _jump) {
 			_jump = false;
-            GameControl.instance.jumpReady = true;
+			GameControl.instance.setJumpReady();
         }
 		if (arrowToTheKnee != true && rb2d.velocity.y == 0f) {
 			anim.SetTrigger ("Walk");
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     IEnumerator ResetJump()
-    {
+    {	
         yield return new WaitForSeconds(0.5f);
         _jump = true;
     }
