@@ -42,6 +42,13 @@ public class GameControl : MonoBehaviour
 	public int backUpMap = 0;
 	public int frontDownMap = 0;
 	public int backDownMap = 0;
+	public int newRandom = 1;
+	public int newRandomFast = 1;
+	private int oldRandom = 1;
+
+//	private int current = 1;
+//	private int goingTo = 1;
+	public int[] differentMaps = new int[]{1,2,3};
 
 	private ScrollingObject[] scrollingObjects;
 
@@ -174,6 +181,19 @@ public class GameControl : MonoBehaviour
 		}
 //		if(startText.enabled == true)
 //			startText.color = new Color(startText.color.r, startText.color.g, startText.color.b, (Mathf.Sin(Time.time * 2.0f) + 1.0f)/2.0f);
+	}
+
+	public void getNewRandom(){
+//		int oldRandom = oldRandom;
+//		current = newRandom;
+		while (oldRandom == newRandom) {
+			Debug.Log ("oldRandom" + oldRandom);
+			oldRandom = Random.Range (1, (differentMaps.Length + 1));
+		}
+		newRandom = oldRandom;
+		newRandomFast = oldRandom;
+//		goingTo = newRandom;
+		Debug.Log ("newRandom" + newRandom);
 	}
 
 	public void setJumpReady(){

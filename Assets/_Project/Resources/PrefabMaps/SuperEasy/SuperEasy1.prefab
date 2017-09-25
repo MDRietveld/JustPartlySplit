@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 4702894442506080}
   - component: {fileID: 61451897503391738}
   - component: {fileID: 114941356340152034}
-  - component: {fileID: 114878296850233740}
   - component: {fileID: 50212814366940024}
   m_Layer: 0
   m_Name: EndMap
@@ -840,7 +839,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1171714876183708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: -0, z: 0}
+  m_LocalPosition: {x: 5.0057383, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4596530328299556}
@@ -2862,18 +2861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5157bd7bba576e84c849bbc4ce1837a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114878296850233740
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195832855055766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d497fc0a40f439da5b435431877f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: -1.5
 --- !u!114 &114882369775540640
 MonoBehaviour:
   m_ObjectHideFlags: 1
