@@ -79,31 +79,6 @@ public class GameControl : MonoBehaviour
 			Destroy (gameObject);
 	}
 
-//	void OnMouseDown(){
-//		if (startGame){
-//			startGame = false;
-//			startText.enabled = false;
-//			highscoreText.SetActive(false);
-//			previousRunText.SetActive(false);
-//			scoreText.enabled = true;
-//			scrollingObjects = GetComponentsInChildren<ScrollingObject> ();
-//			pauseButton.SetActive (true);
-//			jumpReady = true;
-//			if (autoLoad)
-//				CoursesLoader.instance.FirstCourse ();
-//			for (int i = 0; i < scrollingObjects.Length; i++) {
-//				scrollingObjects [i].enabled = true;
-//			}
-//
-//
-//			InvokeRepeating("scoreCount", 1.5f, 1.5f);
-//			return;
-//		} else if (startGame) {
-//			return;
-//		}
-//
-//	}
-
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
@@ -116,15 +91,10 @@ public class GameControl : MonoBehaviour
 			if (hit.collider != null) {
 				if (hit.collider.gameObject.tag != "Volume" && hit.collider.gameObject.tag != "Pause" && jumpReady) {
 					players = gameObject.GetComponentsInChildren<PlayerMovement> ();
-					//if (!_first) {
-//						Debug.Log (PlayerPrefs.GetInt ("TotalJumps"));
-						PlayerPrefs.SetInt ("TotalJumps", (PlayerPrefs.GetInt("TotalJumps") + 1));
-						foreach (PlayerMovement player in players) {
-							player.Jump ();
-						}
-					//} else {
-					//	_first = false;
-					//}
+					PlayerPrefs.SetInt ("TotalJumps", (PlayerPrefs.GetInt("TotalJumps") + 1));
+					foreach (PlayerMovement player in players) {
+						player.Jump ();
+					}
 				}else if(hit.collider.gameObject.tag == "StartGame" && startGame){
 					startGame = false;
 					startPanel.SetActive(false);
@@ -144,10 +114,11 @@ public class GameControl : MonoBehaviour
 					InvokeRepeating("scoreCount", 1.5f, 1.5f);
 					return;
 				}else if(hit.collider.gameObject.tag == "ShowStats"){
-					allStatisticsNumbersText.text = "\n"+PlayerPrefs.GetInt("TotalJumps")+"\n"+
-						PlayerPrefs.GetInt("TotalDeaths")+"\n"+
-						PlayerPrefs.GetInt("TotalScore")+"\n"+
-						PlayerPrefs.GetInt("AvarageScore")+"\n";
+					allStatisticsNumbersText.text = "\n"+
+						PlayerPrefs.GetInt("TotalJumps")	+"\n"+
+						PlayerPrefs.GetInt("TotalDeaths")	+"\n"+
+						PlayerPrefs.GetInt("TotalScore")	+"\n"+
+						PlayerPrefs.GetInt("AvarageScore")	+"\n";
 					startPanel.SetActive(false);
 					statsPanel.SetActive(false);
 					volumeButton.SetActive(false);
@@ -174,7 +145,6 @@ public class GameControl : MonoBehaviour
 
 	public void setJumpReady(){
 		if (!jumpReady) {
-//			Debug.Log ("play sound?");
 			audio.PlayOneShot(landSound);
 			jumpReady = true;
 		}
