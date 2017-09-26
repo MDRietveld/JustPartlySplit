@@ -7,8 +7,8 @@ public class RepeatingBackground : MonoBehaviour
 {
 
 	private BoxCollider2D groundCollider;
-	private int repeatedBackMap = 0;
-	private int repeatedFrontMap = 0;
+	private string version;
+
 
 	//Update runs once per frame
 	private void Update()
@@ -25,52 +25,39 @@ public class RepeatingBackground : MonoBehaviour
 	private void RepositionBackground()
 	{
         // Count for back background
-        if (gameObject.tag == "BBGUp") {
-            GameControl.instance.backUpMap++;
-            repeatedBackMap = GameControl.instance.backUpMap;
-        }
-        // Count for front background
-        if (gameObject.tag == "FBGUp") {
-            GameControl.instance.frontUpMap++;
-            repeatedFrontMap = GameControl.instance.frontUpMap;
-        }
-        if (gameObject.tag == "BBGDown") {
-            GameControl.instance.backDownMap++;
-            repeatedBackMap = GameControl.instance.backDownMap;
-        }
-        // Count for front background
-        if (gameObject.tag == "FBGDown") {
-            GameControl.instance.frontDownMap++;
-            repeatedFrontMap = GameControl.instance.frontDownMap;
+		if (gameObject.tag == "bgFast") {
+			if (GameControl.instance.startBgAt == GameControl.instance.goingToBg) {
+				GameControl.instance.getNewRandom ();
+			}
+			GameControl.instance.frontMap++;
+			if (GameControl.instance.frontMap == 4) {
+				GameControl.instance.frontMap = 1;
+			}
+		}
+
+		if (gameObject.tag == "bgSlow") {
+			GameControl.instance.backMap++;
+			if (GameControl.instance.backMap == 3) {
+				GameControl.instance.backMap = 1;
+			}
+		}
+
+		if (gameObject.tag == "bgSlow" && GameControl.instance.frontMap == 1) {
+			version = GameControl.instance.startBgAt + "." + GameControl.instance.goingToBg;
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/bgcomplete/bgSlow" + version, typeof(Sprite)) as Sprite;
+		} else if (gameObject.tag == "bgSlow" && GameControl.instance.frontMap == 2) {
+			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/bgcomplete/bgSlow" + GameControl.instance.goingToBg, typeof(Sprite)) as Sprite;
         }
 
-        if (gameObject.tag == "BBGDown" && repeatedBackMap == 1) {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackDown1.5", typeof(Sprite)) as Sprite;
-        } else if (gameObject.tag == "BBGUp" && repeatedBackMap == 1) {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackUp1.5", typeof(Sprite)) as Sprite;
-        } else if (gameObject.tag == "BBGDown" && (repeatedBackMap == 2 || repeatedBackMap == 3)) {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackDown2", typeof(Sprite)) as Sprite;
-        } else if (gameObject.tag == "BBGUp" && (repeatedBackMap == 2 || repeatedBackMap == 3)) {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/BackUp2", typeof(Sprite)) as Sprite;
-        }
-
-
-        if (gameObject.tag == "FBGDown" && repeatedFrontMap == 3)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/FrontDown1.5", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "FBGUp" && repeatedFrontMap == 3)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/FrontUp1.5", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "FBGDown" && (repeatedFrontMap == 4 || repeatedFrontMap == 5))
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/FrontDown2", typeof(Sprite)) as Sprite;
-        }
-        else if (gameObject.tag == "FBGUp" && (repeatedFrontMap == 4 || repeatedFrontMap == 5))
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/Background/FrontUp2", typeof(Sprite)) as Sprite;
-        }
+		if (gameObject.tag == "bgFast" && GameControl.instance.frontMap == 1) {
+			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/bgcomplete/bgFast" + GameControl.instance.startBgAt, typeof(Sprite)) as Sprite;
+		} else if (gameObject.tag == "bgFast" && GameControl.instance.frontMap == 2) {
+			version = GameControl.instance.startBgAt + "." + GameControl.instance.goingToBg;
+			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/bgcomplete/bgFast" + version, typeof(Sprite)) as Sprite;
+		} else if (gameObject.tag == "bgFast" && GameControl.instance.frontMap == 3) {
+			gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("Textures/bgcomplete/bgFast" + GameControl.instance.goingToBg, typeof(Sprite)) as Sprite;
+			GameControl.instance.getNewRandom ();
+		}
         //This is how far to the right we will move our background object, in this case, twice its length. This will position it directly to the right of the currently visible background object.
         Vector3 groundOffSet = new Vector3(18f * 2f, 0, 0);
 
