@@ -34,20 +34,16 @@ public class GameControl : MonoBehaviour
 	public bool jumpReady = false;
 //    private bool _jumpReady = false;
     public bool startGame = true;
-	private bool _first = true;
+//	private bool _first = true;
 
 	PlayerMovement[] players;
 
-	public int frontUpMap = 0;
-	public int backUpMap = 0;
-	public int frontDownMap = 0;
-	public int backDownMap = 0;
-	public int newRandom = 1;
-	public int newRandomFast = 1;
-	private int oldRandom = 1;
 
-//	private int current = 1;
-//	private int goingTo = 1;
+	// Variables for repeating background
+	public int frontMap = 0;
+	public int backMap = 0;
+	public int startBgAt = 1;
+	public int goingToBg = 1;
 	public int[] differentMaps = new int[]{1,2,3};
 
 	private ScrollingObject[] scrollingObjects;
@@ -79,6 +75,7 @@ public class GameControl : MonoBehaviour
             } else {
 				PlayerPrefs.SetInt ("Highscore", 0);
 				PlayerPrefs.SetInt ("PreviousRun", 0);
+				PlayerPrefs.SetInt ("VolumeSetting", 1);
 				highscoreText.GetComponentInChildren<Text>().text = "Highscore \n0";
 				previousRunText.GetComponentInChildren<Text>().text = "Last Run \n0";
 			}
@@ -184,16 +181,10 @@ public class GameControl : MonoBehaviour
 	}
 
 	public void getNewRandom(){
-//		int oldRandom = oldRandom;
-//		current = newRandom;
-		while (oldRandom == newRandom) {
-			Debug.Log ("oldRandom" + oldRandom);
-			oldRandom = Random.Range (1, (differentMaps.Length + 1));
+		startBgAt = goingToBg;
+		while(startBgAt == goingToBg){
+			goingToBg = Random.Range (1, (differentMaps.Length + 1));
 		}
-		newRandom = oldRandom;
-		newRandomFast = oldRandom;
-//		goingTo = newRandom;
-		Debug.Log ("newRandom" + newRandom);
 	}
 
 	public void setJumpReady(){
