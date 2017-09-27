@@ -10,7 +10,7 @@ public class CoursesLoader : MonoBehaviour {
     private GameObject[] hardMaps;
     private GameObject[] maps;
     private GameObject firstObject;
-    private Vector2 objectPoolPosition = new Vector2(6f, 0);
+    private Vector2 objectPoolPosition = new Vector2(7f, 0);
     private int superEasyI;
     private int easyI;
     private int mediumI;
@@ -44,26 +44,18 @@ public class CoursesLoader : MonoBehaviour {
 
     public void LoadMap()
     {
-        if (currentMap == 0)
-        {
+        if (currentMap == 0) {
             currentMap = 1;
-        }
-        else
-        {
+        } else {
             currentMap = 0;
         }
-        if (loadedMaps < 5)
-        {
+        if (loadedMaps < 5) {
             rand = Random.Range(0, easyI);
             maps[currentMap] = (GameObject)Instantiate(easyMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-        else if (loadedMaps < 10)
-        {
+        } else if (loadedMaps < 10) {
             rand = Random.Range(0, mediumI);
             maps[currentMap] = (GameObject)Instantiate(mediumMaps[rand], objectPoolPosition, Quaternion.identity);
-        }
-        else
-        {
+        } else {
             rand = Random.Range(0, hardI);
             maps[currentMap] = (GameObject)Instantiate(hardMaps[rand], objectPoolPosition, Quaternion.identity);
         }
