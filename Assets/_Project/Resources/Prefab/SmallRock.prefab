@@ -9,19 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1848502762183716}
+  m_RootGameObject: {fileID: 1274726941661210}
   m_IsPrefabParent: 1
---- !u!1 &1848502762183716
+--- !u!1 &1274726941661210
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4603845989751978}
-  - component: {fileID: 212992343227948238}
-  - component: {fileID: 50940466951380864}
-  - component: {fileID: 60140612252181256}
+  - component: {fileID: 4601708301553646}
+  - component: {fileID: 212408918905887144}
+  - component: {fileID: 50223297925387990}
+  - component: {fileID: 60845132027280548}
   m_Layer: 0
   m_Name: SmallRock
   m_TagString: Obstacle
@@ -29,26 +29,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4603845989751978
+--- !u!4 &4601708301553646
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848502762183716}
+  m_GameObject: {fileID: 1274726941661210}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 15.749101, y: 0.27777606, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
---- !u!50 &50940466951380864
+--- !u!50 &50223297925387990
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848502762183716}
+  m_GameObject: {fileID: 1274726941661210}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -62,12 +62,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &60140612252181256
+--- !u!60 &60845132027280548
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848502762183716}
+  m_GameObject: {fileID: 1274726941661210}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -86,28 +86,28 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.10168648, y: 0.15079737}
-      - {x: 0.077160835, y: 0.16942382}
-      - {x: -0.07513285, y: 0.1679678}
-      - {x: -0.10148287, y: 0.14667082}
-      - {x: -0.14356184, y: 0.108269095}
-      - {x: -0.17171144, y: 0.059518337}
-      - {x: -0.17917347, y: 0.014841557}
-      - {x: -0.17557621, y: -0.068618655}
-      - {x: -0.1886406, y: -0.08902991}
-      - {x: -0.19, y: -0.17}
-      - {x: 0.19, y: -0.17}
-      - {x: 0.18999958, y: -0.038139343}
-      - {x: 0.17812729, y: -0.023975253}
-      - {x: 0.17356777, y: 0.014848709}
-      - {x: 0.15302086, y: 0.08420658}
-      - {x: 0.12390423, y: 0.1293577}
---- !u!212 &212992343227948238
+    - - {x: 0.10168648, y: 0.091327876}
+      - {x: 0.060941696, y: 0.14779854}
+      - {x: -0.012960434, y: 0.14634252}
+      - {x: -0.055529594, y: 0.13315502}
+      - {x: -0.08679485, y: 0.113675416}
+      - {x: -0.12846184, y: 0.07573733}
+      - {x: -0.13592243, y: 0.014841557}
+      - {x: -0.14854431, y: -0.079431295}
+      - {x: -0.17512512, y: -0.10524887}
+      - {x: -0.17107677, y: -0.17}
+      - {x: 0.17648411, y: -0.17}
+      - {x: 0.18189049, y: -0.12734361}
+      - {x: 0.17542458, y: -0.09696056}
+      - {x: 0.16816139, y: -0.0716524}
+      - {x: 0.15302086, y: -0.0185135}
+      - {x: 0.13471699, y: 0.037450254}
+--- !u!212 &212408918905887144
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848502762183716}
+  m_GameObject: {fileID: 1274726941661210}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
