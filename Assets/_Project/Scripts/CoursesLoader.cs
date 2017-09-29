@@ -10,7 +10,7 @@ public class CoursesLoader : MonoBehaviour {
     private GameObject[] hardMaps;
     private GameObject[] maps;
     private GameObject firstObject;
-    private Vector2 objectPoolPosition = new Vector2(7f, 0);
+    private Vector2 objectPoolPosition = new Vector2(4f, 0);
     private int superEasyI;
     private int easyI;
     private int mediumI;
