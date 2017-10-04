@@ -4,13 +4,13 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  productGUID: 0e2d6de3d571b427e93d7434d86aefc1
+  productGUID: 212db1635442b4eaa8f0a1b0777d31bb
   AndroidProfiler: 0
-  defaultScreenOrientation: 0
+  defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: NDM
+  companyName: DefaultCompany
   productName: JustPartlySplit
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -121,7 +121,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 3.1
+  bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -140,14 +140,9 @@ PlayerSettings:
   useHDRDisplay: 0
   targetPixelDensity: 0
   resolutionScalingMode: 0
-  applicationIdentifier:
-    Android: com.MDR.PartlySplit
+  applicationIdentifier: {}
   buildNumber: {}
-<<<<<<< HEAD
-  AndroidBundleVersionCode: 7
-=======
-  AndroidBundleVersionCode: 8
->>>>>>> dev-branche
+  AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -221,9 +216,9 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: PartlySplitKey.keystore
-  AndroidKeyaliasName: justpartlysplit
-  AndroidTVCompatibility: 0
+  AndroidKeystoreName: 
+  AndroidKeyaliasName: 
+  AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
   m_AndroidBanners:
@@ -232,13 +227,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons:
-  - m_BuildTarget: 
-    m_Icons:
-    - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 208b8cf54ed2b4636a592ef0f6101bf3, type: 3}
-      m_Width: 128
-      m_Height: 128
+  m_BuildTargetIcons: []
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
@@ -415,7 +404,7 @@ PlayerSettings:
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
-  ps4Passcode: GXi5xr84P2R391UXaLHbavJvFZGfO47X
+  ps4Passcode: oORc958dBikjYDvOcFEzUEcMGNuUgtSh
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -461,7 +450,7 @@ PlayerSettings:
   psp2LiveAreaTrialPath: 
   psp2PatchChangeInfoPath: 
   psp2PatchOriginalPackage: 
-  psp2PackagePassword: WS2qVOw5lxuBEBNue7b9PZS0hoI6pgab
+  psp2PackagePassword: rdNIwenrKHe3wXIoqLf5wyihrXUKPqBV
   psp2KeystoneFile: 
   psp2MemoryExpansionMode: 0
   psp2DRMType: 0
@@ -594,17 +583,12 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled:
-    Build: 0
-    Collab: 0
-    ErrorHub: 0
-    Hub: 0
-    UNet: 0
-  facebookSdkVersion: 7.9.4
+  cloudServicesEnabled: {}
+  facebookSdkVersion: 
   apiCompatibilityLevel: 2
-  cloudProjectId: 6608523c-47bb-4e18-a206-03a47f8987d2
-  projectName: JustPartlySplit
-  organizationId: nodaymercy
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
