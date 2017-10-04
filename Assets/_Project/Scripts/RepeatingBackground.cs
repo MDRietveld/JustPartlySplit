@@ -37,6 +37,7 @@ public class RepeatingBackground : MonoBehaviour
 
 		if (gameObject.tag == "bgSlow") {
 			GameControl.instance.backMap++;
+			Debug.Log ("Background:" + GameControl.instance.backMap * 18);
 			if (GameControl.instance.backMap == 3) {
 				GameControl.instance.backMap = 1;
 			}
